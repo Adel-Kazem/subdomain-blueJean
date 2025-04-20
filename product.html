@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details - BlueJean</title>
+    <title>BlueJean - Product Details</title>
 
     <!-- TailwindCSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,13 +12,12 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#3B82F6', // Blue color for BlueJean
-                        secondary: '#0F172A', // Dark blue/navy
-                        accent: '#F59E0B', // Amber accent
+                        primary: '#4F46E5', // Customize primary color
+                        secondary: '#10B981', // Customize secondary color
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        display: ['Montserrat', 'sans-serif']
+                        display: ['Playfair Display', 'serif']
                     }
                 }
             }
@@ -28,7 +27,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- AlpineJS -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -36,13 +35,37 @@
     <!-- Custom CSS -->
     <style>
         [x-cloak] { display: none !important; }
-
-        .thumbnail-active {
-            border-color: #3B82F6;
+        .product-img {
+            transition: transform 0.7s ease;
+        }
+        .thumbnails-container {
+            scrollbar-width: thin;
+            scrollbar-color: #4F46E5 #f3f4f6;
+        }
+        .thumbnails-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        .thumbnails-container::-webkit-scrollbar-track {
+            background: #f3f4f6;
+        }
+        .thumbnails-container::-webkit-scrollbar-thumb {
+            background-color: #4F46E5;
+            border-radius: 3px;
+        }
+        .zoom-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        .zoom-effect img {
+            transition: transform 0.5s;
+        }
+        .zoom-effect:hover img {
+            transform: scale(1.1);
         }
     </style>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col">
+<body class="bg-gray-50 min-h-screen flex flex-col" x-data>
 <!-- SVG Sprite Definitions -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <!-- WhatsApp Icon -->
@@ -65,70 +88,49 @@
         <path d="M5 15l7-7 7 7" />
     </symbol>
 
-    <!-- Arrow Icon -->
-    <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 18l6-6-6-6" />
-    </symbol>
-
-    <!-- Arrow Icon -->
-    <symbol id="icon-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M15 18l-6-6 6-6" />
-    </symbol>
-
     <!-- Close/X Icon -->
     <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M18 6L6 18M6 6l12 12" />
     </symbol>
 
     <!-- Star Icon -->
-    <symbol id="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+    <symbol id="icon-star" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
     </symbol>
 
-    <!-- Shipping Icon -->
-    <symbol id="icon-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="1" y="3" width="15" height="13"></rect>
-        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-        <circle cx="5.5" cy="18.5" r="2.5"></circle>
-        <circle cx="18.5" cy="18.5" r="2.5"></circle>
+    <!-- Star Outline Icon -->
+    <symbol id="icon-star-outline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
     </symbol>
 
-    <!-- Return Icon -->
-    <symbol id="icon-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M23 4v6h-6"></path>
-        <path d="M1 20v-6h6"></path>
-        <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"></path>
+    <!-- Arrow Left Icon -->
+    <symbol id="icon-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7" />
     </symbol>
 
-    <!-- Secure Icon -->
-    <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-    </symbol>
-
-    <!-- Magnifying Glass -->
-    <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    <!-- Arrow Right Icon -->
+    <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7" />
     </symbol>
 </svg>
 
 <!-- Header -->
-<header class="bg-white shadow fixed w-full top-0 left-0 right-0 z-50 transition-all duration-300" id="header">
+<header class="bg-white shadow fixed w-full top-0 left-0 right-0 z-50">
     <div class="container mx-auto px-4 py-4">
         <div class="flex justify-between items-center">
             <!-- Logo -->
             <a href="index.html" class="text-2xl font-bold">
                 <h1 id="logo-text">
-                    <span id="logo-prefix" class="text-secondary">Blue</span><span id="logo-highlight" class="text-primary">Jean</span>
+                    <span id="logo-prefix" class="font-display">Blue</span><span id="logo-highlight" class="text-primary font-display">Jean</span>
                 </h1>
             </a>
 
             <!-- Navigation - Desktop -->
             <nav class="hidden md:flex space-x-6">
-                <a href="index.html" id="nav-home" class="text-gray-600 font-medium hover:text-primary transition">Home</a>
-                <a href="products.html" id="nav-products" class="text-secondary font-medium hover:text-primary transition">Shop</a>
-                <a href="index.html#about" id="nav-about" class="text-gray-600 font-medium hover:text-primary transition">About</a>
-                <a href="index.html#contact" id="nav-contact" class="text-gray-600 font-medium hover:text-primary transition">Contact</a>
+                <a href="index.html" id="nav-home" class="text-gray-800 hover:text-primary transition">Home</a>
+                <a href="products.html" id="nav-products" class="text-primary hover:text-primary transition font-medium">Products</a>
+                <a href="#" id="nav-about" class="text-gray-800 hover:text-primary transition">About Us</a>
+                <a href="#" id="nav-contact" class="text-gray-800 hover:text-primary transition">Contact</a>
             </nav>
 
             <!-- Icons -->
@@ -139,7 +141,6 @@
                         <use href="#icon-cart"></use>
                     </svg>
                     <span
-                            x-data
                             x-show="$store.cart.getTotalItems() > 0"
                             x-text="$store.cart.getTotalItems()"
                             class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
@@ -147,7 +148,7 @@
                 </a>
 
                 <!-- Mobile menu button -->
-                <button x-data @click="$store.ui.toggleMenu()" class="md:hidden focus:outline-none">
+                <button @click="$store.ui.toggleMenu()" class="md:hidden focus:outline-none">
                     <svg class="h-6 w-6">
                         <use href="#icon-menu"></use>
                     </svg>
@@ -156,12 +157,12 @@
         </div>
 
         <!-- Mobile Navigation -->
-        <nav x-data x-show="$store.ui.isMenuOpen" x-cloak @click.away="$store.ui.closeMenu()" class="md:hidden py-4">
+        <nav x-show="$store.ui.isMenuOpen" x-cloak @click.away="$store.ui.closeMenu()" class="md:hidden py-4">
             <div class="flex flex-col space-y-3">
-                <a href="index.html" id="nav-mobile-home" class="text-gray-600 font-medium hover:text-primary transition">Home</a>
-                <a href="products.html" id="nav-mobile-products" class="text-secondary font-medium hover:text-primary transition">Shop</a>
-                <a href="index.html#about" id="nav-mobile-about" class="text-gray-600 font-medium hover:text-primary transition">About</a>
-                <a href="index.html#contact" id="nav-mobile-contact" class="text-gray-600 font-medium hover:text-primary transition">Contact</a>
+                <a href="index.html" id="nav-mobile-home" class="text-gray-800 hover:text-primary transition">Home</a>
+                <a href="products.html" id="nav-mobile-products" class="text-primary font-medium hover:text-primary transition">Products</a>
+                <a href="#" id="nav-mobile-about" class="text-gray-800 hover:text-primary transition">About Us</a>
+                <a href="#" id="nav-mobile-contact" class="text-gray-800 hover:text-primary transition">Contact</a>
             </div>
         </nav>
     </div>
@@ -169,331 +170,428 @@
 
 <!-- Main Content -->
 <main class="flex-grow pt-24 pb-16">
-    <!-- Breadcrumb -->
-    <div class="container mx-auto px-4 md:px-8 py-4">
-        <div class="flex items-center text-sm text-gray-500">
-            <a href="index.html" class="hover:text-primary transition">Home</a>
-            <span class="mx-2">/</span>
-            <a href="products.html" class="hover:text-primary transition">Shop</a>
-            <span class="mx-2">/</span>
-            <span class="text-gray-700" id="product-name-breadcrumb"></span>
+    <!-- Breadcrumbs -->
+    <div class="bg-white py-4 border-b border-gray-200">
+        <div class="container mx-auto px-4 md:px-8">
+            <nav class="flex text-sm">
+                <a href="index.html" class="text-gray-500 hover:text-primary transition-colors">Home</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <a href="products.html" class="text-gray-500 hover:text-primary transition-colors">Products</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <span id="breadcrumb-current" class="text-gray-900 font-medium">Product Details</span>
+            </nav>
         </div>
     </div>
 
     <!-- Product Detail Section -->
-    <section class="container mx-auto px-4 md:px-8">
-        <div class="bg-white rounded-lg shadow-sm p-4 md:p-8">
-            <!-- Product Detail -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="product-detail-container">
-                <!-- Product Image Gallery - Left Side -->
-                <div x-data="productViewer(selectedProduct)" x-init="init()" x-cloak>
-                    <!-- Main Image Container -->
-                    <div class="bg-gray-100 rounded-lg overflow-hidden">
-                        <img
-                                x-ref="mainImage"
-                                :src="getSelectedImage()"
-                                :alt="selectedProduct.name"
-                                class="w-full h-auto object-contain"
-                                @mouseenter="mouseEnter($event)"
-                                @mouseleave="mouseLeave()"
-                                @mousemove="mouseMove($event)"
-                                @error="handleImageError($event)"
-                                style="min-height: 300px; max-height: 500px;"
-                        >
-                    </div>
+    <div class="container mx-auto px-4 md:px-8 py-8">
+        <div class="bg-white shadow-sm">
+            <!-- Get Product ID from URL parameter -->
+            <div x-data="{
+          getProductId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = parseInt(urlParams.get('id'));
+            return isNaN(id) ? 1001 : id; // Default to 1001 if no valid ID
+          },
+          getProduct() {
+            const id = this.getProductId();
+            return PRODUCTS.find(p => p.id === id) || PRODUCTS[0];
+          }
+        }">
+                <div x-data="productDetail({ product: getProduct() })" x-cloak>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-6">
+                        <!-- Product Images Section -->
+                        <div class="product-images" x-data="productViewer(product)">
+                            <!-- Main Image -->
+                            <div class="main-image-container mb-4 border border-gray-200 overflow-hidden">
+                                <img
+                                        x-ref="mainImage"
+                                        :src="getSelectedImage()"
+                                        :alt="product.name"
+                                        @mouseenter="mouseEnter($event)"
+                                        @mouseleave="mouseLeave()"
+                                        @mousemove="mouseMove($event)"
+                                        @error="handleImageError($event)"
+                                        :style="imgStyle"
+                                        class="w-full h-96 object-contain">
+                            </div>
 
-                    <!-- Thumbnails -->
-                    <div
-                            x-show="hasThumbnails()"
-                            class="mt-4 relative"
-                            x-ref="thumbnailsContainer"
-                    >
-                        <button
-                                @click="scrollThumbnails('left')"
-                                x-show="!isScrollLeftEnd"
-                                class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full shadow-md p-1 z-10"
-                        >
-                            <svg class="w-5 h-5 text-secondary">
-                                <use href="#icon-arrow-left"></use>
-                            </svg>
-                        </button>
+                            <!-- Thumbnails -->
+                            <div
+                                    x-show="hasThumbnails()"
+                                    class="thumbnails-container relative flex space-x-2 overflow-x-auto pb-2"
+                                    x-ref="thumbnailsContainer">
 
-                        <div class="flex space-x-2 px-8 overflow-x-auto py-2" x-ref="thumbnailsWrap">
-                            <template x-for="(image, index) in productImages" :key="index">
-                                <div
-                                        @click="selectImage(image)"
-                                        :class="{'border-primary': selectedImage === image, 'border-transparent': selectedImage !== image}"
-                                        class="thumbnail cursor-pointer border-2 rounded-md overflow-hidden flex-shrink-0 w-20 h-20 transition-all hover:border-primary"
-                                >
-                                    <img :src="image" :alt="`${selectedProduct.name} thumbnail ${index + 1}`" class="w-full h-full object-cover">
-                                </div>
-                            </template>
-                        </div>
+                                <button
+                                        @click="scrollThumbnails('left')"
+                                        x-show="!isScrollLeftEnd"
+                                        class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 p-1 rounded-full shadow z-10">
+                                    <svg class="w-5 h-5 text-gray-700">
+                                        <use href="#icon-arrow-left"></use>
+                                    </svg>
+                                </button>
 
-                        <button
-                                @click="scrollThumbnails('right')"
-                                x-show="!isScrollRightEnd"
-                                class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full shadow-md p-1 z-10"
-                        >
-                            <svg class="w-5 h-5 text-secondary">
-                                <use href="#icon-arrow-right"></use>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Product Info - Right Side -->
-                <div x-data="productDetail({ product: selectedProduct })" x-init="init()" x-cloak>
-                    <!-- Product Status Badge -->
-                    <div class="mb-3">
-              <span
-                      x-show="product.isOnSale"
-                      class="inline-block bg-red-500 text-white text-xs font-medium py-1 px-2 rounded">
-                SALE
-              </span>
-                        <span
-                                x-show="!product.isOnSale && product.isFeatured"
-                                class="inline-block bg-accent text-white text-xs font-medium py-1 px-2 rounded">
-                FEATURED
-              </span>
-                    </div>
-
-                    <!-- Product Title and Rating -->
-                    <h1 id="product-title" x-text="product.name" class="text-3xl font-bold text-secondary mb-2"></h1>
-
-                    <div class="flex items-center mb-4">
-                        <div class="flex text-accent">
-                            <template x-for="i in 5">
-                                <svg class="w-5 h-5" :fill="i <= Math.round(product.rating) ? 'currentColor' : 'none'" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
-                                </svg>
-                            </template>
-                            <span class="ml-2 text-sm text-gray-500" x-text="`(${product.reviews_count} reviews)`"></span>
-                        </div>
-                    </div>
-
-                    <!-- Price -->
-                    <div class="mb-6">
-              <span
-                      x-show="product.isOnSale"
-                      class="text-lg text-gray-500 line-through mr-3"
-                      x-text="utilities().formatPrice(product.base_price)">
-              </span>
-                        <span
-                                class="text-2xl font-bold text-secondary"
-                                x-text="utilities().formatPrice(getVariantPrice())">
-              </span>
-                    </div>
-
-                    <!-- Short Description -->
-                    <p class="text-gray-600 mb-6" x-text="product.description"></p>
-
-                    <!-- Variant Selectors -->
-                    <template x-for="(values, option) in product.options" :key="option">
-                        <div class="mb-6">
-                            <label x-text="utilities().formatOptionName(option)" class="block text-sm font-medium text-gray-700 mb-2"></label>
-                            <div class="flex flex-wrap gap-2">
-                                <template x-for="value in values" :key="value">
-                                    <button
-                                            @click="selectedOptions[option] = value"
-                                            :class="selectedOptions[option] === value
-                        ? 'bg-primary text-white border-primary'
-                        : 'bg-white text-gray-700 border-gray-300 hover:border-primary'"
-                                            class="px-4 py-2 border rounded transition-colors"
-                                            :disabled="!isOptionValueAvailable(option, value)"
-                                            :style="isOptionValueAvailable(option, value) ? '' : 'opacity: 0.5; cursor: not-allowed;'"
-                                            x-text="value">
-                                    </button>
+                                <template x-for="image in product.images" :key="image">
+                                    <div
+                                            @click="selectImage(image)"
+                                            :class="{'border-primary': selectedImage === image, 'border-transparent': selectedImage !== image}"
+                                            class="thumbnail flex-shrink-0 w-20 h-20 border-2 cursor-pointer">
+                                        <img :src="image" :alt="product.name" class="w-full h-full object-cover">
+                                    </div>
                                 </template>
+
+                                <button
+                                        @click="scrollThumbnails('right')"
+                                        x-show="!isScrollRightEnd"
+                                        class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 p-1 rounded-full shadow z-10">
+                                    <svg class="w-5 h-5 text-gray-700">
+                                        <use href="#icon-arrow-right"></use>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
-                    </template>
 
-                    <!-- Quantity Selector -->
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Quantity</label>
-                        <div class="flex items-center">
+                        <!-- Product Info Section -->
+                        <div class="product-info" x-data="utilities()">
+                            <!-- Status Badge -->
+                            <div class="mb-4 flex space-x-2">
+                  <span x-show="product.isOnSale" class="inline-block bg-primary text-white text-xs font-semibold py-1 px-3 tracking-wide">
+                    ON SALE
+                  </span>
+                                <span x-show="product.isFeatured" class="inline-block bg-amber-500 text-white text-xs font-semibold py-1 px-3 tracking-wide">
+                    FEATURED
+                  </span>
+                            </div>
+
+                            <!-- Basic Info -->
+                            <h1 id="product-title" x-text="product.name" class="text-3xl font-display font-bold mb-2"></h1>
+
+                            <div class="flex items-center mb-4 space-x-2">
+                                <!-- Brand -->
+                                <span x-show="product.brand" x-text="product.brand" class="text-gray-600"></span>
+                                <span x-show="product.brand" class="text-gray-400">|</span>
+
+                                <!-- Rating -->
+                                <div class="flex items-center">
+                                    <div class="flex">
+                                        <template x-for="i in 5" :key="i">
+                                            <svg class="w-4 h-4" :class="{'text-amber-400': i <= Math.round(product.rating), 'text-gray-300': i > Math.round(product.rating)}">
+                                                <use :href="i <= product.rating ? '#icon-star' : '#icon-star-outline'"></use>
+                                            </svg>
+                                        </template>
+                                    </div>
+                                    <span x-show="product.reviews_count" class="ml-1 text-sm text-gray-500">
+                      (<span x-text="product.reviews_count"></span> reviews)
+                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Price -->
+                            <div class="mb-6">
+                                <div x-show="!product.isOnSale" class="text-2xl font-semibold" x-text="formatPrice(getVariantPrice())"></div>
+                                <div x-show="product.isOnSale" class="flex items-center space-x-3">
+                                    <span class="text-2xl font-semibold text-primary" x-text="formatPrice(getVariantPrice() * 0.8)"></span>
+                                    <span class="text-lg text-gray-500 line-through" x-text="formatPrice(getVariantPrice())"></span>
+                                    <span class="text-sm bg-primary bg-opacity-10 text-primary px-2 py-1">20% OFF</span>
+                                </div>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="mb-6">
+                                <p x-text="product.description" class="text-gray-600 leading-relaxed"></p>
+                            </div>
+
+                            <!-- Options -->
+                            <template x-if="product.hasVariants && product.options">
+                                <div class="mb-6 space-y-4">
+                                    <template x-for="(values, option) in product.options" :key="option">
+                                        <div class="option-selector">
+                                            <label x-text="formatOptionName(option)" class="block font-medium mb-2"></label>
+                                            <div class="option-buttons flex flex-wrap gap-2">
+                                                <template x-for="value in values" :key="value">
+                                                    <button
+                                                            @click="selectedOptions[option] = value"
+                                                            :class="{
+                                'bg-primary text-white border-primary': selectedOptions[option] === value,
+                                'bg-white text-gray-800 border-gray-300 hover:border-primary': selectedOptions[option] !== value,
+                                'opacity-50 cursor-not-allowed': !isOptionValueAvailable(option, value)
+                              }"
+                                                            :disabled="!isOptionValueAvailable(option, value)"
+                                                            class="border py-2 px-4 min-w-[60px] text-center transition-colors"
+                                                            x-text="value">
+                                                    </button>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+
+                            <!-- Stock Status -->
+                            <div class="mb-6">
+                                <div x-show="getVariantStock() > product.lowStockThreshold" class="text-green-600 flex items-center">
+                                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>In Stock</span>
+                                </div>
+                                <div x-show="getVariantStock() <= product.lowStockThreshold && getVariantStock() > 0" class="text-amber-600 flex items-center">
+                                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                                    </svg>
+                                    <span>Only <span x-text="getVariantStock()"></span> left!</span>
+                                </div>
+                                <div x-show="getVariantStock() === 0" class="text-red-500 flex items-center">
+                                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                    <span>Out of Stock</span>
+                                </div>
+                            </div>
+
+                            <!-- Quantity Selector -->
+                            <div class="mb-6">
+                                <label class="block font-medium mb-2">Quantity</label>
+                                <div class="flex items-center max-w-[150px]">
+                                    <button
+                                            @click="decreaseQuantity()"
+                                            class="border border-gray-300 px-3 py-2 flex items-center justify-center text-gray-600 hover:bg-gray-100 transition-colors">
+                                        -
+                                    </button>
+                                    <input
+                                            type="number"
+                                            x-model.number="quantity"
+                                            min="1"
+                                            :max="getVariantStock()"
+                                            class="border-y border-gray-300 py-2 w-16 text-center focus:outline-none focus:border-primary">
+                                    <button
+                                            @click="increaseQuantity()"
+                                            class="border border-gray-300 px-3 py-2 flex items-center justify-center text-gray-600 hover:bg-gray-100 transition-colors">
+                                        +
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Shipping Info -->
+                            <div x-show="product.free_shipping" class="mb-6 flex items-center text-green-600">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path>
+                                </svg>
+                                <span>Free Shipping</span>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
+                                <!-- Add to cart button -->
+                                <button
+                                        @click="addToCart()"
+                                        :disabled="!isVariantInStock()"
+                                        :class="{'opacity-50 cursor-not-allowed': !isVariantInStock()}"
+                                        class="flex-1 bg-primary text-white font-medium py-3 px-6 hover:bg-indigo-600 transition-colors flex items-center justify-center">
+                                    <svg class="w-5 h-5 mr-2">
+                                        <use href="#icon-cart"></use>
+                                    </svg>
+                                    Add to Cart
+                                </button>
+
+                                <!-- WhatsApp inquiry button -->
+                                <button
+                                        x-data="whatsappInquiry()"
+                                        @click="inquireAboutProduct()"
+                                        class="flex-1 border-2 border-green-500 text-green-500 font-medium py-3 px-6 hover:bg-green-500 hover:text-white transition-colors flex items-center justify-center">
+                                    <svg class="w-5 h-5 mr-2">
+                                        <use href="#icon-whatsapp"></use>
+                                    </svg>
+                                    Inquire via WhatsApp
+                                </button>
+                            </div>
+
+                            <!-- SKU -->
+                            <div x-show="product.sku" class="text-sm text-gray-500">
+                                SKU: <span x-text="product.sku"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Details Tabs -->
+                    <div class="border-t border-gray-200 mt-8" x-data="{ activeTab: 'features' }">
+                        <!-- Tabs Navigation -->
+                        <div class="flex border-b border-gray-200">
                             <button
-                                    @click="decreaseQuantity()"
-                                    class="bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors w-10 h-10 flex items-center justify-center rounded-l"
-                                    :disabled="quantity <= 1"
-                                    :class="{'opacity-50 cursor-not-allowed': quantity <= 1}"
-                            >
-                                <span class="text-lg font-bold">-</span>
+                                    @click="activeTab = 'features'"
+                                    :class="{'border-b-2 border-primary text-primary': activeTab === 'features', 'text-gray-500': activeTab !== 'features'}"
+                                    class="py-4 px-6 font-medium focus:outline-none transition-colors">
+                                Features
                             </button>
-                            <input
-                                    type="number"
-                                    x-model.number="quantity"
-                                    min="1"
-                                    :max="getVariantStock()"
-                                    class="border-y border-gray-300 text-center w-16 h-10 focus:outline-none"
-                            >
                             <button
-                                    @click="increaseQuantity()"
-                                    class="bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors w-10 h-10 flex items-center justify-center rounded-r"
-                                    :disabled="quantity >= getVariantStock()"
-                                    :class="{'opacity-50 cursor-not-allowed': quantity >= getVariantStock()}"
-                            >
-                                <span class="text-lg font-bold">+</span>
+                                    @click="activeTab = 'specs'"
+                                    :class="{'border-b-2 border-primary text-primary': activeTab === 'specs', 'text-gray-500': activeTab !== 'specs'}"
+                                    class="py-4 px-6 font-medium focus:outline-none transition-colors">
+                                Specifications
+                            </button>
+                            <button
+                                    @click="activeTab = 'shipping'"
+                                    :class="{'border-b-2 border-primary text-primary': activeTab === 'shipping', 'text-gray-500': activeTab !== 'shipping'}"
+                                    class="py-4 px-6 font-medium focus:outline-none transition-colors">
+                                Shipping & Returns
                             </button>
                         </div>
-                    </div>
 
-                    <!-- Stock Status -->
-                    <div class="mb-6">
-                        <p x-show="getVariantStock() > 5" class="text-green-600 flex items-center">
-                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span>In Stock</span>
-                        </p>
-                        <p x-show="getVariantStock() <= 5 && getVariantStock() > 0" class="text-amber-600 flex items-center">
-                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-                            </svg>
-                            <span>Only <span x-text="getVariantStock()"></span> left!</span>
-                        </p>
-                        <p x-show="getVariantStock() === 0" class="text-red-600 flex items-center">
-                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <span>Out of Stock</span>
-                        </p>
-                    </div>
+                        <!-- Tab Contents -->
+                        <div class="p-6">
+                            <!-- Features Tab -->
+                            <div x-show="activeTab === 'features'" x-data="utilities()">
+                                <template x-if="product.features && typeof product.features === 'object' && !Array.isArray(product.features)">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <template x-for="(value, key) in product.features" :key="key">
+                                            <div class="flex space-x-2">
+                                                <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                </svg>
+                                                <div>
+                                                    <span class="font-medium" x-text="formatFeatureKey(key)"></span>:
+                                                    <span x-text="value"></span>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </template>
 
-                    <!-- Action Buttons -->
-                    <div class="flex flex-col sm:flex-row gap-4 mb-8">
-                        <!-- Add to Cart Button -->
-                        <button
-                                @click="addToCart()"
-                                :disabled="!isVariantInStock()"
-                                :class="{'opacity-50 cursor-not-allowed': !isVariantInStock()}"
-                                class="flex-1 bg-primary text-white font-medium py-3 px-6 rounded hover:bg-primary/90 transition flex items-center justify-center"
-                        >
-                            <svg class="w-5 h-5 mr-2">
-                                <use href="#icon-cart"></use>
-                            </svg>
-                            Add to Cart
-                        </button>
+                                <template x-if="product.features && Array.isArray(product.features)">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <template x-for="(feature, index) in product.features" :key="index">
+                                            <div class="flex space-x-2">
+                                                <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                </svg>
+                                                <div x-text="feature"></div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </template>
 
-                        <!-- WhatsApp Inquiry Button -->
-                        <button
-                                x-data="whatsappInquiry()"
-                                @click="inquireAboutProduct()"
-                                class="flex-1 border-2 border-green-600 text-green-600 font-medium py-3 px-6 rounded hover:bg-green-600 hover:text-white transition flex items-center justify-center"
-                        >
-                            <svg class="h-5 w-5 mr-2">
-                                <use href="#icon-whatsapp"></use>
-                            </svg>
-                            Inquire via WhatsApp
-                        </button>
-                    </div>
+                                <template x-if="!product.features">
+                                    <p class="text-gray-500">No feature information available for this product.</p>
+                                </template>
+                            </div>
 
-                    <!-- Additional Info -->
-                    <div class="border-t border-gray-200 pt-6 space-y-4">
-                        <!-- Shipping -->
-                        <div class="flex items-center">
-                            <svg class="w-5 h-5 text-primary mr-3">
-                                <use href="#icon-truck"></use>
-                            </svg>
-                            <span class="text-gray-700">
-                  <span x-show="product.free_shipping">Free shipping</span>
-                  <span x-show="!product.free_shipping">Standard shipping available</span>
-                </span>
-                        </div>
+                            <!-- Specifications Tab -->
+                            <div x-show="activeTab === 'specs'">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">
+                                    <!-- Brand -->
+                                    <div x-show="product.brand" class="border-b border-gray-200 pb-3">
+                                        <span class="text-gray-500">Brand:</span>
+                                        <span class="font-medium ml-2" x-text="product.brand"></span>
+                                    </div>
 
-                        <!-- Returns -->
-                        <div class="flex items-center">
-                            <svg class="w-5 h-5 text-primary mr-3">
-                                <use href="#icon-refresh"></use>
-                            </svg>
-                            <span class="text-gray-700">30-day easy returns</span>
-                        </div>
+                                    <!-- Weight -->
+                                    <div x-show="product.weight" class="border-b border-gray-200 pb-3">
+                                        <span class="text-gray-500">Weight:</span>
+                                        <span class="font-medium ml-2" x-text="product.weight.value + ' ' + product.weight.unit"></span>
+                                    </div>
 
-                        <!-- Secure checkout -->
-                        <div class="flex items-center">
-                            <svg class="w-5 h-5 text-primary mr-3">
-                                <use href="#icon-shield"></use>
-                            </svg>
-                            <span class="text-gray-700">Secure checkout</span>
+                                    <!-- Dimensions -->
+                                    <div x-show="product.dimensions" class="border-b border-gray-200 pb-3">
+                                        <span class="text-gray-500">Dimensions:</span>
+                                        <span class="font-medium ml-2"
+                                              x-text="product.dimensions.length + ' × ' + product.dimensions.width + ' × ' + product.dimensions.height + ' ' + product.dimensions.unit">
+                      </span>
+                                    </div>
+
+                                    <!-- SKU -->
+                                    <div x-show="product.sku" class="border-b border-gray-200 pb-3">
+                                        <span class="text-gray-500">SKU:</span>
+                                        <span class="font-medium ml-2" x-text="product.sku"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Shipping & Returns Tab -->
+                            <div x-show="activeTab === 'shipping'">
+                                <div class="space-y-4">
+                                    <div>
+                                        <h3 class="font-semibold text-lg mb-2">Shipping Information</h3>
+                                        <p class="text-gray-600">We offer standard shipping on all orders, which takes 3-5 business days. Orders are processed within 24 hours of payment confirmation.</p>
+                                        <p x-show="product.free_shipping" class="mt-2 text-green-600 font-medium">This product qualifies for free shipping!</p>
+                                        <p x-show="!product.free_shipping" class="mt-2 text-gray-600">Shipping costs are calculated at checkout based on your location and the product's specifications.</p>
+                                    </div>
+
+                                    <div>
+                                        <h3 class="font-semibold text-lg mb-2">Return Policy</h3>
+                                        <p class="text-gray-600">We accept returns within 30 days of delivery for products in their original condition. Please contact us via WhatsApp to initiate a return. Return shipping costs may apply.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Product Tabs -->
-            <div class="mt-12" x-data="{ activeTab: 'description' }">
-                <!-- Tab Navigation -->
-                <div class="border-b border-gray-200">
-                    <div class="flex flex-wrap -mb-px">
-                        <button
-                                @click="activeTab = 'description'"
-                                :class="{ 'border-primary text-primary': activeTab === 'description', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'description' }"
-                                class="inline-block py-4 px-4 md:px-6 font-medium text-center border-b-2 text-sm md:text-base transition"
-                        >
-                            Description
-                        </button>
-                        <button
-                                @click="activeTab = 'features'"
-                                :class="{ 'border-primary text-primary': activeTab === 'features', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'features' }"
-                                class="inline-block py-4 px-4 md:px-6 font-medium text-center border-b-2 text-sm md:text-base transition"
-                        >
-                            Features & Specs
-                        </button>
-                        <button
-                                @click="activeTab = 'reviews'"
-                                :class="{ 'border-primary text-primary': activeTab === 'reviews', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'reviews' }"
-                                class="inline-block py-4 px-4 md:px-6 font-medium text-center border-b-2 text-sm md:text-base transition"
-                        >
-                            Reviews
-                        </button>
+        <!-- Related Products -->
+        <div class="mt-12" x-data="{
+        getProductById(id) {
+          return PRODUCTS.find(p => p.id === id) || null;
+        },
+        getRelatedProducts() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const id = parseInt(urlParams.get('id'));
+          if (isNaN(id)) return [];
+
+          const product = PRODUCTS.find(p => p.id === id);
+          if (!product || !product.relatedProducts) return [];
+
+          return product.relatedProducts
+            .map(this.getProductById)
+            .filter(p => p !== null);
+        }
+      }">
+            <template x-if="getRelatedProducts().length > 0">
+                <div>
+                    <h2 class="text-2xl font-display font-bold mb-6">You May Also Like</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" x-data="utilities()">
+                        <template x-for="product in getRelatedProducts()" :key="product.id">
+                            <div class="product-card group bg-white shadow-sm hover:shadow-md transition-shadow">
+                                <a :href="'product.html?id=' + product.id" class="block relative overflow-hidden">
+                                    <img :src="product.images[0]" :alt="product.name" class="w-full h-64 object-cover">
+                                    <div x-show="product.isOnSale" class="absolute top-4 right-4 bg-primary text-white text-xs font-semibold py-1 px-3 tracking-wide">
+                                        SALE
+                                    </div>
+                                </a>
+                                <div class="p-4">
+                                    <a :href="'product.html?id=' + product.id" class="block mb-1">
+                                        <h3 class="font-medium text-lg group-hover:text-primary transition-colors" x-text="product.name"></h3>
+                                    </a>
+                                    <p class="text-sm text-gray-500 mb-3" x-text="product.brand"></p>
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <span x-show="!product.isOnSale" class="text-lg font-semibold" x-text="formatPrice(product.base_price)"></span>
+                                            <div x-show="product.isOnSale" class="flex items-center space-x-2">
+                                                <span class="text-lg font-semibold text-primary" x-text="formatPrice(product.base_price * 0.8)"></span>
+                                                <span class="text-sm text-gray-500 line-through" x-text="formatPrice(product.base_price)"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
                     </div>
                 </div>
-
-                <!-- Tab Content -->
-                <div class="py-6">
-                    <!-- Description Tab -->
-                    <div x-show="activeTab === 'description'" id="tab-description" x-cloak>
-                        <p class="text-gray-600" id="full-description"></p>
-                    </div>
-
-                    <!-- Features Tab -->
-                    <div x-show="activeTab === 'features'" id="tab-features" x-cloak>
-                        <!-- Features will be populated with JavaScript -->
-                    </div>
-
-                    <!-- Reviews Tab -->
-                    <div x-show="activeTab === 'reviews'" id="tab-reviews" x-cloak>
-                        <!-- Reviews will be populated with JavaScript -->
-                    </div>
-                </div>
-            </div>
+            </template>
         </div>
-    </section>
-
-    <!-- Related Products Section -->
-    <section class="container mx-auto px-4 md:px-8 mt-12">
-        <h2 class="text-2xl font-bold text-secondary mb-8">You May Also Like</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="related-products">
-            <!-- Related products will be populated with JavaScript -->
-        </div>
-    </section>
+    </div>
 </main>
 
 <!-- Footer -->
-<footer class="bg-secondary text-white">
-    <div class="container mx-auto px-4 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-            <!-- Column 1 - About -->
+<footer class="bg-gray-100 pt-20 pb-10">
+    <div class="container mx-auto px-4 md:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            <!-- Brand Column -->
             <div>
-                <a href="index.html" class="text-2xl font-bold mb-6 inline-block">
-                    <h3 id="footer-logo">
-                        <span class="text-white">Blue</span><span class="text-primary">Jean</span>
-                    </h3>
-                </a>
-                <p id="footer-about-text" class="text-gray-300 mb-6">
-                    Premium quality apparel and accessories for the modern individual. Style that speaks your language.
-                </p>
+                <a href="/" class="font-display font-bold text-2xl tracking-wide text-gray-900 mb-6 inline-block">Blue<span class="text-primary">Jean</span></a>
+                <p id="footer-about-text" class="text-gray-600 mb-6">Premium apparel and accessories for discerning individuals who appreciate quality and timeless design.</p>
                 <div class="flex space-x-4">
                     <a href="#" class="text-gray-400 hover:text-primary transition-colors">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -513,67 +611,62 @@
                 </div>
             </div>
 
-            <!-- Column 2 - Shop -->
+            <!-- Shop Links -->
             <div>
-                <h3 id="footer-heading-1" class="text-xl font-semibold mb-6">Shop</h3>
+                <h3 id="footer-heading-1" class="font-semibold text-lg mb-4">Shop</h3>
                 <ul class="space-y-3">
-                    <li><a href="products.html" class="text-gray-300 hover:text-primary transition-colors">All Products</a></li>
-                    <li><a href="products.html" class="text-gray-300 hover:text-primary transition-colors">T-shirts</a></li>
-                    <li><a href="products.html" class="text-gray-300 hover:text-primary transition-colors">Pants</a></li>
-                    <li><a href="products.html" class="text-gray-300 hover:text-primary transition-colors">Watches</a></li>
-                    <li><a href="products.html" class="text-gray-300 hover:text-primary transition-colors">New Arrivals</a></li>
+                    <li><a href="products.html" id="footer-link-all" class="text-gray-600 hover:text-primary transition-colors">All Products</a></li>
+                    <li><a href="products.html?filter=new" id="footer-link-new" class="text-gray-600 hover:text-primary transition-colors">New Arrivals</a></li>
+                    <li><a href="products.html?filter=featured" id="footer-link-featured" class="text-gray-600 hover:text-primary transition-colors">Featured</a></li>
+                    <li><a href="products.html?filter=sale" id="footer-link-sale" class="text-gray-600 hover:text-primary transition-colors">On Sale</a></li>
                 </ul>
             </div>
 
-            <!-- Column 3 - Help -->
+            <!-- Categories Links -->
             <div>
-                <h3 id="footer-heading-2" class="text-xl font-semibold mb-6">Help</h3>
+                <h3 id="footer-heading-2" class="font-semibold text-lg mb-4">Categories</h3>
                 <ul class="space-y-3">
-                    <li><a href="#" class="text-gray-300 hover:text-primary transition-colors">Customer Service</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-primary transition-colors">Shipping & Returns</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-primary transition-colors">FAQs</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-primary transition-colors">Size Guide</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-primary transition-colors">Contact Us</a></li>
+                    <template x-for="category in CATEGORIES.filter(c => c.parent_id === null).slice(0, 5)" :key="category.id">
+                        <li>
+                            <a :href="'products.html?category=' + category.id" class="text-gray-600 hover:text-primary transition-colors" x-text="category.name"></a>
+                        </li>
+                    </template>
                 </ul>
             </div>
 
-            <!-- Column 4 - Contact -->
+            <!-- Contact -->
             <div>
-                <h3 id="footer-heading-3" class="text-xl font-semibold mb-6">Contact</h3>
-                <ul class="space-y-3">
-                    <li class="text-gray-300">Email: support@bluejean.com</li>
-                    <li class="text-gray-300">Phone: +1 (555) 123-4567</li>
-                    <li>
-                        <button
-                                x-data
-                                @click="$store.ui.openWhatsApp('Hello, I would like more information about your products.')"
-                                class="text-gray-300 hover:text-green-400 transition-colors flex items-center">
-                            <svg class="w-5 h-5 mr-2">
-                                <use href="#icon-whatsapp"></use>
-                            </svg>
-                            <span>Chat on WhatsApp</span>
-                        </button>
-                    </li>
-                </ul>
+                <h3 id="footer-heading-3" class="font-semibold text-lg mb-4">Contact Us</h3>
+                <p id="footer-contact-email" class="text-gray-600 mb-2">Email: info@bluejean.com</p>
+                <p id="footer-contact-phone" class="text-gray-600 mb-4">Phone: (555) 123-4567</p>
+                <!-- WhatsApp Contact Button -->
+                <button
+                        @click="$store.ui.openWhatsApp('Hello, I would like more information about BlueJean products.')"
+                        class="flex items-center space-x-2 text-gray-600 hover:text-green-500 transition-colors">
+                    <svg class="h-5 w-5">
+                        <use href="#icon-whatsapp"></use>
+                    </svg>
+                    <span>Contact on WhatsApp</span>
+                </button>
             </div>
         </div>
 
         <!-- Copyright -->
-        <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+        <div class="mt-8 pt-4 border-t border-gray-200 text-center text-gray-500">
             <p id="footer-copyright">&copy; 2025 BlueJean. All rights reserved.</p>
         </div>
     </div>
 </footer>
 
 <!-- Back to top button -->
-<button x-data @click="$store.ui.scrollToTop()" class="fixed bottom-4 left-4 bg-primary text-white p-2 rounded-full shadow-lg hover:bg-primary/90 transition-colors">
+<button @click="$store.ui.scrollToTop()" class="fixed bottom-4 left-4 bg-primary text-white p-2 rounded-full shadow-lg">
     <svg class="h-6 w-6">
         <use href="#icon-arrow-up"></use>
     </svg>
 </button>
 
 <!-- WhatsApp button -->
-<button x-data @click="$store.ui.openWhatsApp('Hello, I have a question about your products.')" class="fixed bottom-4 right-4 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-colors">
+<button @click="$store.ui.openWhatsApp('Hello, I have a question about your products.')" class="fixed bottom-4 right-4 bg-green-500 text-white p-2 rounded-full shadow-lg">
     <svg class="h-6 w-6">
         <use href="#icon-whatsapp"></use>
     </svg>
@@ -581,7 +674,6 @@
 
 <!-- Cart notification -->
 <div
-        x-data
         x-show="$store.ui.showCartNotification"
         x-cloak
         x-transition:enter="transition ease-out duration-300"
@@ -596,190 +688,8 @@
 
 <!-- JavaScript Files -->
 <script src="js/products.js"></script>
+<script src="js/categories.js"></script>
 <script src="js/app.js"></script>
 <script src="js/product-page.js"></script>
-
-<script>
-    // Get product ID from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = parseInt(urlParams.get('id')) || 1001; // Default to first product if no ID
-
-    // Find product by ID
-    const selectedProduct = PRODUCTS.find(p => p.id === productId) || PRODUCTS[0];
-
-    // Set page title and breadcrumb
-    document.title = `${selectedProduct.name} - BlueJean`;
-    document.getElementById('product-name-breadcrumb').textContent = selectedProduct.name;
-
-    // Set description in the description tab
-    document.getElementById('full-description').textContent = selectedProduct.description;
-
-    // Populate features tab
-    const featuresTab = document.getElementById('tab-features');
-    if (selectedProduct.features) {
-        if (typeof selectedProduct.features === 'object' && !Array.isArray(selectedProduct.features)) {
-            const featuresList = document.createElement('div');
-            featuresList.className = 'grid grid-cols-1 md:grid-cols-2 gap-4';
-
-            for (const [key, value] of Object.entries(selectedProduct.features)) {
-                const featureItem = document.createElement('div');
-                featureItem.className = 'flex';
-
-                const featureLabel = document.createElement('div');
-                featureLabel.className = 'w-1/2 font-medium text-secondary';
-                featureLabel.textContent = key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, ' ') + ':';
-
-                const featureValue = document.createElement('div');
-                featureValue.className = 'w-1/2 text-gray-600';
-                featureValue.textContent = value;
-
-                featureItem.appendChild(featureLabel);
-                featureItem.appendChild(featureValue);
-                featuresList.appendChild(featureItem);
-            }
-
-            featuresTab.appendChild(featuresList);
-        } else if (Array.isArray(selectedProduct.features)) {
-            const featuresList = document.createElement('ul');
-            featuresList.className = 'list-disc pl-5 space-y-2 text-gray-600';
-
-            selectedProduct.features.forEach(feature => {
-                const item = document.createElement('li');
-                item.textContent = feature;
-                featuresList.appendChild(item);
-            });
-
-            featuresTab.appendChild(featuresList);
-        }
-    } else {
-        featuresTab.innerHTML = '<p class="text-gray-600">No detailed features available for this product.</p>';
-    }
-
-    // Populate reviews tab
-    const reviewsTab = document.getElementById('tab-reviews');
-    const reviewCount = selectedProduct.reviews_count || 0;
-
-    if (reviewCount > 0) {
-        const reviewsContainer = document.createElement('div');
-        reviewsContainer.className = 'mb-8';
-
-        const reviewsHeader = document.createElement('h3');
-        reviewsHeader.className = 'text-xl font-semibold text-secondary mb-4';
-        reviewsHeader.textContent = 'Customer Reviews';
-
-        const ratingDiv = document.createElement('div');
-        ratingDiv.className = 'flex items-center mb-4';
-
-        const starsDiv = document.createElement('div');
-        starsDiv.className = 'flex text-accent';
-
-        for (let i = 1; i <= 5; i++) {
-            const star = document.createElement('svg');
-            star.className = 'w-5 h-5';
-            star.innerHTML = `<use href="#icon-star"></use>`;
-
-            if (i <= Math.round(selectedProduct.rating)) {
-                star.setAttribute('fill', 'currentColor');
-            } else {
-                star.setAttribute('fill', 'none');
-            }
-
-            starsDiv.appendChild(star);
-        }
-
-        const reviewSummary = document.createElement('p');
-        reviewSummary.className = 'ml-2 text-sm text-gray-600';
-        reviewSummary.textContent = `Based on ${reviewCount} reviews`;
-
-        ratingDiv.appendChild(starsDiv);
-        ratingDiv.appendChild(reviewSummary);
-
-        reviewsContainer.appendChild(reviewsHeader);
-        reviewsContainer.appendChild(ratingDiv);
-
-        reviewsTab.appendChild(reviewsContainer);
-    } else {
-        reviewsTab.innerHTML = '<p class="text-gray-600 text-center py-8">No reviews yet for this product.</p>';
-    }
-
-    // Populate related products
-    const relatedContainer = document.getElementById('related-products');
-
-    // Get 4 related products (can be from similar category, or just random)
-    let relatedProducts = [];
-
-    if (selectedProduct.relatedProducts && selectedProduct.relatedProducts.length > 0) {
-        relatedProducts = selectedProduct.relatedProducts.slice(0, 4).map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean);
-    } else if (selectedProduct.categories && selectedProduct.categories.length > 0) {
-        // Get products from the same category
-        const sameCategory = PRODUCTS.filter(p =>
-            p.id !== selectedProduct.id &&
-            p.categories.some(cat => selectedProduct.categories.includes(cat))
-        );
-
-        relatedProducts = sameCategory.slice(0, 4);
-    }
-
-    // If still not enough, add random products
-    if (relatedProducts.length < 4) {
-        const remainingCount = 4 - relatedProducts.length;
-        const existingIds = new Set(relatedProducts.map(p => p.id));
-        existingIds.add(selectedProduct.id);
-
-        const randomProducts = PRODUCTS
-            .filter(p => !existingIds.has(p.id))
-            .sort(() => 0.5 - Math.random())
-            .slice(0, remainingCount);
-
-        relatedProducts = [...relatedProducts, ...randomProducts];
-    }
-
-    // Render related products
-    relatedProducts.forEach(product => {
-        const productCard = document.createElement('div');
-        productCard.className = 'bg-white rounded-lg shadow overflow-hidden';
-
-        const productLink = document.createElement('a');
-        productLink.href = `product.html?id=${product.id}`;
-        productLink.className = 'block';
-
-        const productImage = document.createElement('img');
-        productImage.src = product.images[0];
-        productImage.alt = product.name;
-        productImage.className = 'w-full h-48 object-cover';
-
-        const productInfo = document.createElement('div');
-        productInfo.className = 'p-4';
-
-        const productName = document.createElement('h3');
-        productName.className = 'font-medium text-secondary hover:text-primary transition';
-        productName.textContent = product.name;
-
-        const productPrice = document.createElement('p');
-        productPrice.className = 'mt-2 font-semibold text-secondary';
-        productPrice.textContent = `$${product.base_price.toFixed(2)}`;
-
-        productLink.appendChild(productImage);
-        productInfo.appendChild(productName);
-        productInfo.appendChild(productPrice);
-
-        productCard.appendChild(productLink);
-        productCard.appendChild(productInfo);
-
-        relatedContainer.appendChild(productCard);
-    });
-
-    // Header scroll effect
-    window.addEventListener('scroll', function() {
-        const header = document.getElementById('header');
-        if (window.scrollY > 50) {
-            header.classList.add('py-2', 'shadow-md');
-            header.classList.remove('py-4');
-        } else {
-            header.classList.add('py-4');
-            header.classList.remove('py-2', 'shadow-md');
-        }
-    });
-</script>
 </body>
 </html>
