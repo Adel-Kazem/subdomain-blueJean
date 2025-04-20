@@ -327,7 +327,8 @@ const PRODUCTS = [
       preparation: "Trimmed to specification upon request"
     },
     images: [
-      "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+      "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      "https://raw.githubusercontent.com/Adel-Kazem/subdomain-blueJean/main/products_images/belt-wolf-of-wallstreet-leonardo-di-caprio-v0-qd479m2ochjb1.webp"
     ],
     options: {
       weight: [
@@ -396,7 +397,7 @@ const PRODUCTS = [
       5
     ],
     createdAt: "2025-01-20T00:00:00Z",
-    updatedAt: "2025-04-20T08:32:48.223Z"
+    updatedAt: "2025-04-20T08:38:14.265Z"
  },
  {
     id: 5,
