@@ -33,10 +33,11 @@ const CATEGORIES = [
     productIds: [
       1,
       2,
-      5
+      5,
+      9000
     ],
     created_at: "2025-01-01T00:00:00Z",
-    updated_at: "2025-04-20T08:32:48.232Z"
+    updated_at: "2025-04-25T14:58:28.301Z"
  },
  {
     id: 3,
