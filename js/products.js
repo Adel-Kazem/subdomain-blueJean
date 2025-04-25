@@ -578,7 +578,7 @@ const PRODUCTS = [
     brand: "Voluptas consequatur",
     rating: 0,
     reviews_count: 0,
-    status: "archived",
+    status: "active",
     isFeatured: false,
     isOnSale: true,
     requiresShipping: true,
@@ -612,6 +612,6 @@ const PRODUCTS = [
       2
     ],
     createdAt: "2025-04-25T14:58:28.296Z",
-    updatedAt: "2025-04-25T14:58:28.296Z"
+    updatedAt: "2025-04-25T14:59:21.648Z"
  }
 ];
