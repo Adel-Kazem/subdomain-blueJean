@@ -300,7 +300,7 @@ const PRODUCTS = [
  },
  {
     id: 4,
-    name: "Beef Brisket",
+    name: "Beef Brisket22",
     description: "Our lol carefully selected brisket has the perfect amount of fat content for slow smoking or braising to achieve that melt-in-your-mouth texture.",
     base_price: 16.99,
     base_shipping_cost: 7.99,
@@ -397,11 +397,11 @@ const PRODUCTS = [
       5
     ],
     createdAt: "2025-01-20T00:00:00Z",
-    updatedAt: "2025-04-20T08:38:14.265Z"
+    updatedAt: "2025-04-25T18:06:41.075Z"
  },
  {
     id: 5,
-    name: "Beef Short Ribs",
+    name: "Beef Short Ribs22",
     description: "These meaty short ribs are rich in flavor and perfect for slow cooking. They become fall-off-the-bone tender when braised, smoked, or sous vide.",
     base_price: 18.99,
     base_shipping_cost: 6.99,
@@ -416,7 +416,7 @@ const PRODUCTS = [
     isOnSale: false,
     requiresShipping: true,
     requiresInventoryTracking: true,
-    stock: 15,
+    stock: 0,
     hasVariants: true,
     totalVariantStock: 15,
     lowStockThreshold: 4,
@@ -482,6 +482,6 @@ const PRODUCTS = [
       4
     ],
     createdAt: "2025-01-25T00:00:00Z",
-    updatedAt: "2025-03-30T00:00:00Z"
+    updatedAt: "2025-04-25T18:06:45.133Z"
  }
 ];
