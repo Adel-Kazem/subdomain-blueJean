@@ -565,5 +565,51 @@ const PRODUCTS = [
     ],
     createdAt: "2025-03-01T00:00:00Z",
     updatedAt: "2025-04-15T00:00:00Z"
+ },
+ {
+    id: 7,
+    name: "Accusamus sint offi",
+    description: "Sapiente mollit dict",
+    base_price: 32,
+    base_shipping_cost: 0,
+    free_shipping: true,
+    sku: "Aliquid ipsam dolore",
+    slug: "new-product",
+    brand: "Aliquip veniam labo",
+    rating: 0,
+    reviews_count: 0,
+    status: "active",
+    isFeatured: true,
+    isOnSale: false,
+    requiresShipping: false,
+    requiresInventoryTracking: false,
+    stock: 0,
+    hasVariants: false,
+    totalVariantStock: 0,
+    lowStockThreshold: 5,
+    features: {},
+    images: [
+      "https://raw.githubusercontent.com/Adel-Kazem/subdomain-blueJean/main/products_images/belt-wolf-of-wallstreet-leonardo-di-caprio-v0-qd479m2ochjb1.webp"
+    ],
+    options: {},
+    option_images: {},
+    variant_images: {},
+    option_variants_stock: {},
+    option_price_adjustments: {},
+    option_shipping_adjustments: {},
+    weight: {
+      value: 31,
+      unit: "oz"
+    },
+    dimensions: {
+      length: 8,
+      width: 23,
+      height: 76,
+      unit: "in"
+    },
+    option_dimension_overrides: {},
+    categories: [],
+    createdAt: "2025-04-25T17:51:07.853Z",
+    updatedAt: "2025-04-25T17:51:07.853Z"
  }
 ];
