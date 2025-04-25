@@ -613,5 +613,51 @@ const PRODUCTS = [
     ],
     createdAt: "2025-04-25T14:58:28.296Z",
     updatedAt: "2025-04-25T14:59:21.648Z"
+ },
+ {
+    id: 9001,
+    name: "Autem consequatur an",
+    description: "Officia perspiciatis",
+    base_price: 25,
+    base_shipping_cost: 11,
+    free_shipping: false,
+    sku: "Cupidatat eum repudi",
+    slug: "new-product",
+    brand: "Sint et magnam inven",
+    rating: 0,
+    reviews_count: 0,
+    status: "draft",
+    isFeatured: false,
+    isOnSale: true,
+    requiresShipping: true,
+    requiresInventoryTracking: true,
+    stock: 0,
+    hasVariants: false,
+    totalVariantStock: 0,
+    lowStockThreshold: 5,
+    features: {},
+    images: [
+      "https://raw.githubusercontent.com/Adel-Kazem/subdomain-blueJean/main/products_images/belt-wolf-of-wallstreet-leonardo-di-caprio-v0-qd479m2ochjb1.webp"
+    ],
+    options: {},
+    option_images: {},
+    variant_images: {},
+    option_variants_stock: {},
+    option_price_adjustments: {},
+    option_shipping_adjustments: {},
+    weight: {
+      value: 75,
+      unit: "oz"
+    },
+    dimensions: {
+      length: 30,
+      width: 100,
+      height: 89,
+      unit: "mm"
+    },
+    option_dimension_overrides: {},
+    categories: [],
+    createdAt: "2025-04-25T15:27:03.887Z",
+    updatedAt: "2025-04-25T15:27:03.887Z"
  }
 ];
