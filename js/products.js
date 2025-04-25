@@ -636,9 +636,7 @@ const PRODUCTS = [
     totalVariantStock: 0,
     lowStockThreshold: 5,
     features: {},
-    images: [
-      "https://raw.githubusercontent.com/Adel-Kazem/subdomain-blueJean/main/products_images/belt-wolf-of-wallstreet-leonardo-di-caprio-v0-qd479m2ochjb1.webp"
-    ],
+    images: [],
     options: {},
     option_images: {},
     variant_images: {},
@@ -658,6 +656,6 @@ const PRODUCTS = [
     option_dimension_overrides: {},
     categories: [],
     createdAt: "2025-04-25T15:27:03.887Z",
-    updatedAt: "2025-04-25T15:27:03.887Z"
+    updatedAt: "2025-04-25T17:09:50.831Z"
  }
 ];
