@@ -300,7 +300,7 @@ const PRODUCTS = [
  },
  {
     id: 5,
-    name: "Beef Short Ribs",
+    name: "Beef Short Ribs222",
     description: "These meaty short ribs are rich in flavor and perfect for slow cooking. They become fall-off-the-bone tender when braised, smoked, or sous vide.",
     base_price: 18.99,
     base_shipping_cost: 6.99,
@@ -315,7 +315,7 @@ const PRODUCTS = [
     isOnSale: false,
     requiresShipping: true,
     requiresInventoryTracking: true,
-    stock: 15,
+    stock: 0,
     hasVariants: true,
     totalVariantStock: 15,
     lowStockThreshold: 4,
@@ -381,7 +381,7 @@ const PRODUCTS = [
       4
     ],
     createdAt: "2025-01-25T00:00:00Z",
-    updatedAt: "2025-03-30T00:00:00Z"
+    updatedAt: "2025-04-25T18:53:40.875Z"
  },
  {
     id: 6,
