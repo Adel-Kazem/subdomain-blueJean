@@ -45,31 +45,28 @@
     <link rel="stylesheet" href="css/styles.css">
 
     <script>
-        // Add this at the top of each HTML file, before all other scripts
+        // One-time simple cache buster that just adds a random version
         (function() {
-            // Force browser to reload all JS files by adding random query parameter
-            window.addEventListener('DOMContentLoaded', function() {
-                var scripts = document.getElementsByTagName('script');
-                for (var i = 0; i < scripts.length; i++) {
-                    if (scripts[i].src &&
-                        (scripts[i].src.includes('products.js') || scripts[i].src.includes('categories.js'))) {
-                        // Add or replace existing version parameter with random value
-                        var currentSrc = scripts[i].src;
-                        var newSrc = currentSrc.split('?')[0] + '?v=' + Date.now() + Math.random();
-                        console.log('Reloading: ' + currentSrc + ' → ' + newSrc);
+            // Add random version to scripts, but only once per page load
+            if (window._scriptsVersioned) return; // Prevent multiple executions
+            window._scriptsVersioned = true;
 
-                        // Create new script element and replace the old one
-                        var newScript = document.createElement('script');
-                        newScript.src = newSrc;
-                        scripts[i].parentNode.replaceChild(newScript, scripts[i]);
+            // Generate a single random version for this page load
+            var randomVersion = Date.now();
 
-                        // For extra measure, load a non-existent file to trigger network activity
-                        var dummy = document.createElement('script');
-                        dummy.src = '/dummy.js?' + Math.random();
-                        document.head.appendChild(dummy);
+            // Find all script tags with matching src
+            var scripts = document.getElementsByTagName('script');
+            for (var i = 0; i < scripts.length; i++) {
+                if (scripts[i].src &&
+                    (scripts[i].src.includes('products.js') || scripts[i].src.includes('categories.js'))) {
+                    // Simply add the version parameter to the existing src attribute
+                    if (scripts[i].src.includes('?')) {
+                        scripts[i].src = scripts[i].src.split('?')[0] + '?v=' + randomVersion;
+                    } else {
+                        scripts[i].src = scripts[i].src + '?v=' + randomVersion;
                     }
                 }
-            });
+            }
         })();
     </script>
 </head>
