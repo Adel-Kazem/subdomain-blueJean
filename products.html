@@ -43,6 +43,35 @@
         }
     </style>
     <link rel="stylesheet" href="css/styles.css">
+
+    <script>
+        // Add this at the top of each HTML file, before all other scripts
+        (function() {
+            // Force browser to reload all JS files by adding random query parameter
+            window.addEventListener('DOMContentLoaded', function() {
+                var scripts = document.getElementsByTagName('script');
+                for (var i = 0; i < scripts.length; i++) {
+                    if (scripts[i].src &&
+                        (scripts[i].src.includes('products.js') || scripts[i].src.includes('categories.js'))) {
+                        // Add or replace existing version parameter with random value
+                        var currentSrc = scripts[i].src;
+                        var newSrc = currentSrc.split('?')[0] + '?v=' + Date.now() + Math.random();
+                        console.log('Reloading: ' + currentSrc + ' → ' + newSrc);
+
+                        // Create new script element and replace the old one
+                        var newScript = document.createElement('script');
+                        newScript.src = newSrc;
+                        scripts[i].parentNode.replaceChild(newScript, scripts[i]);
+
+                        // For extra measure, load a non-existent file to trigger network activity
+                        var dummy = document.createElement('script');
+                        dummy.src = '/dummy.js?' + Math.random();
+                        document.head.appendChild(dummy);
+                    }
+                }
+            });
+        })();
+    </script>
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col" x-data>
 <!-- SVG Sprite Definitions -->
