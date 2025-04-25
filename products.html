@@ -45,28 +45,10 @@
     <link rel="stylesheet" href="css/styles.css">
 
     <script>
-        // One-time simple cache buster that just adds a random version
+        // Just create one dummy request with random parameter, nothing else
         (function() {
-            // Add random version to scripts, but only once per page load
-            if (window._scriptsVersioned) return; // Prevent multiple executions
-            window._scriptsVersioned = true;
-
-            // Generate a single random version for this page load
-            var randomVersion = Date.now();
-
-            // Find all script tags with matching src
-            var scripts = document.getElementsByTagName('script');
-            for (var i = 0; i < scripts.length; i++) {
-                if (scripts[i].src &&
-                    (scripts[i].src.includes('products.js') || scripts[i].src.includes('categories.js'))) {
-                    // Simply add the version parameter to the existing src attribute
-                    if (scripts[i].src.includes('?')) {
-                        scripts[i].src = scripts[i].src.split('?')[0] + '?v=' + randomVersion;
-                    } else {
-                        scripts[i].src = scripts[i].src + '?v=' + randomVersion;
-                    }
-                }
-            }
+            var dummyImg = new Image();
+            dummyImg.src = '/cache-buster.jpg?random=' + Math.random();
         })();
     </script>
 </head>
