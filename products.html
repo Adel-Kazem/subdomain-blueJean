@@ -153,21 +153,11 @@
     </div>
 
     <!-- Product Catalog Section -->
-    <div class="container mx-auto px-4 md:px-8"
-         x-data="productCatalog({
-        products: PRODUCTS,
-        categories: CATEGORIES,
-        defaultView: 'grid',
-        defaultSort: 'featured'
-      })"
-         x-cloak>
-
+    <div class="container mx-auto px-4 md:px-8" x-data="productCatalog()" x-cloak>
         <!-- Mobile Filter Toggle -->
         <div class="md:hidden mb-4">
-            <button
-                    @click="mobileFiltersOpen = !mobileFiltersOpen"
-                    class="w-full flex items-center justify-center space-x-2 bg-white py-3 shadow-sm border border-gray-200 rounded"
-                    x-data="{ mobileFiltersOpen: false }">
+            <button @click="mobileFiltersOpen = !mobileFiltersOpen"
+                    class="w-full flex items-center justify-center space-x-2 bg-white py-3 shadow-sm border border-gray-200 rounded">
                 <svg class="w-5 h-5">
                     <use href="#icon-filter"></use>
                 </svg>
@@ -176,13 +166,15 @@
         </div>
 
         <div class="flex flex-col md:flex-row md:space-x-8">
-            <!-- Sidebar Filters -->
-            <div x-show="mobileFiltersOpen" x-cloak class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+            <!-- Mobile Filter Overlay -->
+            <div x-show="mobileFiltersOpen"
+                 x-cloak
+                 class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
                  @click="mobileFiltersOpen = false"></div>
 
-            <div class="w-full md:w-1/4 lg:w-1/5"
-                 :class="{'fixed inset-y-0 right-0 w-3/4 bg-white z-50 overflow-y-auto p-6': mobileFiltersOpen, 'mb-6': !mobileFiltersOpen}"
-                 x-data="{ mobileFiltersOpen: false }">
+            <!-- Sidebar Filters -->
+            <div :class="{'fixed inset-y-0 right-0 w-3/4 bg-white z-50 overflow-y-auto p-6': mobileFiltersOpen, 'mb-6': !mobileFiltersOpen}"
+                 class="w-full md:w-1/4 lg:w-1/5">
 
                 <!-- Mobile Close Button -->
                 <div class="flex justify-between items-center mb-6 md:hidden">
@@ -198,11 +190,10 @@
                 <div class="mb-8">
                     <h3 class="font-semibold text-lg mb-4">Search</h3>
                     <div class="relative">
-                        <input
-                                type="text"
-                                x-model="searchQuery"
-                                placeholder="Search products..."
-                                class="w-full border border-gray-300 rounded-none py-2 px-4 focus:outline-none focus:border-primary">
+                        <input type="text"
+                               x-model="searchQuery"
+                               placeholder="Search products..."
+                               class="w-full border border-gray-300 rounded-none py-2 px-4 focus:outline-none focus:border-primary">
                     </div>
                 </div>
 
@@ -210,31 +201,25 @@
                 <div class="mb-8">
                     <h3 class="font-semibold text-lg mb-4">Categories</h3>
                     <div class="space-y-2">
-                        <button
-                                @click="selectedCategory = null"
+                        <button @click="selectedCategory = null"
                                 class="block text-left w-full py-2 transition-colors"
                                 :class="{'text-primary font-medium': selectedCategory === null, 'text-gray-600': selectedCategory !== null}">
                             All Categories
                         </button>
-
                         <template x-for="category in CATEGORIES.filter(c => c.parent_id === null)" :key="category.id">
                             <div>
-                                <button
-                                        @click="selectedCategory = category.id"
+                                <button @click="selectedCategory = category.id"
                                         class="block text-left w-full py-2 transition-colors flex items-center justify-between"
                                         :class="{'text-primary font-medium': selectedCategory === category.id, 'text-gray-600': selectedCategory !== category.id}">
                                     <span x-text="category.name"></span>
-                                    <span
-                                            x-show="CATEGORIES.filter(c => c.parent_id === category.id).length > 0"
-                                            class="text-gray-400 text-sm"
-                                            x-text="'(' + CATEGORIES.filter(c => c.parent_id === category.id).length + ')'"></span>
+                                    <span x-show="CATEGORIES.filter(c => c.parent_id === category.id).length > 0"
+                                          class="text-gray-400 text-sm"
+                                          x-text="'(' + CATEGORIES.filter(c => c.parent_id === category.id).length + ')'"></span>
                                 </button>
-
                                 <!-- Subcategories -->
                                 <div x-show="selectedCategory === category.id" class="ml-4 space-y-2 mt-2">
                                     <template x-for="subcat in CATEGORIES.filter(c => c.parent_id === category.id)" :key="subcat.id">
-                                        <button
-                                                @click="selectedCategory = subcat.id"
+                                        <button @click="selectedCategory = subcat.id"
                                                 class="block text-left w-full py-1 transition-colors"
                                                 :class="{'text-primary': selectedCategory === subcat.id, 'text-gray-500': selectedCategory !== subcat.id}">
                                             <span x-text="subcat.name"></span>
@@ -251,19 +236,31 @@
                     <h3 class="font-semibold text-lg mb-4">Price Range</h3>
                     <div class="space-y-2">
                         <label class="flex items-center">
-                            <input type="checkbox" x-model="priceRanges" value="0-50" class="mr-2 text-primary focus:ring-primary">
+                            <input type="checkbox"
+                                   x-model="priceRanges"
+                                   value="0-50"
+                                   class="mr-2 text-primary focus:ring-primary">
                             <span>$0 - $50</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" x-model="priceRanges" value="50-100" class="mr-2 text-primary focus:ring-primary">
+                            <input type="checkbox"
+                                   x-model="priceRanges"
+                                   value="50-100"
+                                   class="mr-2 text-primary focus:ring-primary">
                             <span>$50 - $100</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" x-model="priceRanges" value="100-200" class="mr-2 text-primary focus:ring-primary">
+                            <input type="checkbox"
+                                   x-model="priceRanges"
+                                   value="100-200"
+                                   class="mr-2 text-primary focus:ring-primary">
                             <span>$100 - $200</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" x-model="priceRanges" value="200+" class="mr-2 text-primary focus:ring-primary">
+                            <input type="checkbox"
+                                   x-model="priceRanges"
+                                   value="200+"
+                                   class="mr-2 text-primary focus:ring-primary">
                             <span>$200+</span>
                         </label>
                     </div>
@@ -274,23 +271,28 @@
                     <h3 class="font-semibold text-lg mb-4">Product Status</h3>
                     <div class="space-y-2">
                         <label class="flex items-center">
-                            <input type="checkbox" x-model="showNew" class="mr-2 text-primary focus:ring-primary">
+                            <input type="checkbox"
+                                   x-model="showNew"
+                                   class="mr-2 text-primary focus:ring-primary">
                             <span>New Arrivals</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" x-model="showSale" class="mr-2 text-primary focus:ring-primary">
+                            <input type="checkbox"
+                                   x-model="showSale"
+                                   class="mr-2 text-primary focus:ring-primary">
                             <span>On Sale</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" x-model="inStock" class="mr-2 text-primary focus:ring-primary">
+                            <input type="checkbox"
+                                   x-model="inStock"
+                                   class="mr-2 text-primary focus:ring-primary">
                             <span>In Stock Only</span>
                         </label>
                     </div>
                 </div>
 
                 <!-- Clear Filters -->
-                <button
-                        @click="clearFilters()"
+                <button @click="clearFilters()"
                         class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 transition-colors">
                     Clear All Filters
                 </button>
@@ -392,9 +394,7 @@
                                                     <use href="#icon-cart"></use>
                                                 </svg>
                                             </button>
-                                            <button
-                                                    x-data="whatsappInquiry()"
-                                                    @click="inquireAboutProduct(product)"
+                                            <button @click="$store.ui.openWhatsApp('Hello, I\'m interested in ' + product.name + '. Product link: ' + window.location.origin + '/product.html?id=' + product.id)"
                                                     class="bg-white hover:bg-green-500 hover:text-white text-green-500 border border-green-500 transition-colors p-2 rounded-full">
                                                 <svg class="w-5 h-5">
                                                     <use href="#icon-whatsapp"></use>
@@ -466,14 +466,11 @@
                                                 </svg>
                                                 <span>Add to Cart</span>
                                             </button>
-                                            <button
-                                                    x-data="whatsappInquiry()"
-                                                    @click="inquireAboutProduct(product)"
-                                                    class="flex items-center space-x-2 bg-white hover:bg-green-500 hover:text-white text-green-500 border border-green-500 transition-colors py-2 px-4">
+                                            <button @click="$store.ui.openWhatsApp('Hello, I\'m interested in ' + product.name + '. Product link: ' + window.location.origin + '/product.html?id=' + product.id)"
+                                                    class="bg-white hover:bg-green-500 hover:text-white text-green-500 border border-green-500 transition-colors p-2 rounded-full">
                                                 <svg class="w-5 h-5">
                                                     <use href="#icon-whatsapp"></use>
                                                 </svg>
-                                                <span>Inquire</span>
                                             </button>
                                         </div>
                                     </div>
