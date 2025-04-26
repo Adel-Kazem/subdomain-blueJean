@@ -10,10 +10,12 @@ const CATEGORIES = [
     active: true,
     display_order: 10,
     productIds: [
-      2
+      1,
+      2,
+      6
     ],
     created_at: "2025-01-01T00:00:00Z",
-    updated_at: "2025-04-26T08:56:13.227Z"
+    updated_at: "2025-04-26T09:04:31.878Z"
  },
  {
     id: 2,
@@ -26,10 +28,11 @@ const CATEGORIES = [
     active: true,
     display_order: 20,
     productIds: [
+      1,
       2
     ],
     created_at: "2025-01-01T00:00:00Z",
-    updated_at: "2025-04-26T08:56:13.228Z"
+    updated_at: "2025-04-26T09:04:31.878Z"
  },
  {
     id: 3,
@@ -42,10 +45,11 @@ const CATEGORIES = [
     active: true,
     display_order: 30,
     productIds: [
+      1,
       2
     ],
     created_at: "2025-01-01T00:00:00Z",
-    updated_at: "2025-04-26T08:56:13.228Z"
+    updated_at: "2025-04-26T09:04:31.878Z"
  },
  {
     id: 4,
@@ -85,8 +89,10 @@ const CATEGORIES = [
     parent_id: 1,
     active: true,
     display_order: 60,
-    productIds: [],
+    productIds: [
+      6
+    ],
     created_at: "2025-01-01T00:00:00Z",
-    updated_at: "2025-04-26T08:41:33.548Z"
+    updated_at: "2025-04-26T09:04:31.878Z"
  }
 ];
