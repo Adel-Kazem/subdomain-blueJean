@@ -5,7 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BlueJean - Products</title>
 
-
+    <script>// service-worker.js
+    self.addEventListener('fetch', function(event) {
+        if (event.request.url.includes('products.js') || event.request.url.includes('categories.js')) {
+            event.respondWith(
+                fetch(event.request.url, { cache: 'no-cache' })
+                    .catch(function() {
+                        return caches.match(event.request);
+                    })
+            );
+        }
+    });
+    </script>
 
 
     <!-- TailwindCSS -->
@@ -608,26 +619,8 @@
 
 <!--build comment-->
 <!-- JavaScript Files -->
-<script src="js/categories.js"></script>
-<script src="js/products.js"></script>
 <script src="js/app.js"></script>
 <script src="js/products-page.js"></script>
 
-<script>
-    // Combined approach using all three methods
-    (function() {
-        // Method 4: Fetch nonexistent resource
-        fetch('/dummy?t=' + Date.now(), {cache: 'reload'}).catch(() => {});
-
-        // Method 5: Create dummy script element
-        var s = document.createElement('script');
-        s.src = '/x.js?' + Math.random();
-        document.head.appendChild(s);
-
-        // Method 6: Create invisible image request
-        var dummyImg = new Image();
-        dummyImg.src = '/cache-buster.jpg?random=' + Math.random();
-    })();
-</script>
 </body>
 </html>
