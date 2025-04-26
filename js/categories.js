@@ -12,11 +12,10 @@ const CATEGORIES = [
     productIds: [
       1,
       2,
-      3,
-      6
+      3
     ],
     created_at: "2025-01-01T00:00:00Z",
-    updated_at: "2025-04-26T08:38:08.123Z"
+    updated_at: "2025-04-26T08:41:33.547Z"
  },
  {
     id: 2,
@@ -92,10 +91,8 @@ const CATEGORIES = [
     parent_id: 1,
     active: true,
     display_order: 60,
-    productIds: [
-      6
-    ],
+    productIds: [],
     created_at: "2025-01-01T00:00:00Z",
-    updated_at: "2025-04-26T08:35:06.179Z"
+    updated_at: "2025-04-26T08:41:33.548Z"
  }
 ];
