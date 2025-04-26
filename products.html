@@ -25,6 +25,14 @@
     </script>
 
     <script>
+        // Force reload on every page visit
+        if (performance.navigation.type === 1) { // Check if it's a page refresh
+            localStorage.setItem('forceReload', Date.now());
+            window.location.reload(true); // Hard reload on first refresh
+        }
+    </script>
+
+    <script>
         // Just create one dummy request with random parameter, nothing else
         (function() {
             var dummyImg = new Image();
