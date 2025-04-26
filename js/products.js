@@ -115,7 +115,7 @@ const PRODUCTS = [
     brand: "Pariatur Amet fugi",
     rating: 0,
     reviews_count: 0,
-    status: "draft",
+    status: "active",
     isFeatured: false,
     isOnSale: true,
     requiresShipping: true,
@@ -147,6 +147,6 @@ const PRODUCTS = [
     option_dimension_overrides: {},
     categories: [],
     createdAt: "2025-04-26T08:24:46.234Z",
-    updatedAt: "2025-04-26T08:24:46.233Z"
+    updatedAt: "2025-04-26T08:29:31.733Z"
  }
 ];
