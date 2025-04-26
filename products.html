@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BlueJean - Products</title>
 
+    <script>
+        // Combined approach using all three methods
+        (function() {
+            // Method 4: Fetch nonexistent resource
+            fetch('/dummy?t=' + Date.now(), {cache: 'reload'}).catch(() => {});
+
+            // Method 5: Create dummy script element
+            var s = document.createElement('script');
+            s.src = '/x.js?' + Math.random();
+            document.head.appendChild(s);
+
+            // Method 6: Create invisible image request
+            var dummyImg = new Image();
+            dummyImg.src = '/cache-buster.jpg?random=' + Math.random();
+        })();
+    </script>
 
 
     <!-- TailwindCSS -->
@@ -25,8 +41,6 @@
             }
         }
     </script>
-
-    <script>new Image().src = '/cache-bust.gif?rnd=' + Math.random();</script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
