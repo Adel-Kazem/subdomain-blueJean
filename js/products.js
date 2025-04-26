@@ -1,7 +1,7 @@
 const PRODUCTS = [
  {
     id: 1,
-    name: "Prime Ribeye Steak",
+    name: "Prime Ribeye Steakd",
     description: "Our premium ribeye steak is perfectly marbled for exceptional flavor and tenderness. Ideal for grilling or pan-searing to medium-rare perfection.",
     base_price: 35.99,
     base_shipping_cost: 5.99,
@@ -16,7 +16,7 @@ const PRODUCTS = [
     isOnSale: false,
     requiresShipping: true,
     requiresInventoryTracking: true,
-    stock: 12,
+    stock: 0,
     hasVariants: true,
     totalVariantStock: 12,
     lowStockThreshold: 3,
@@ -100,7 +100,7 @@ const PRODUCTS = [
       2
     ],
     createdAt: "2025-01-01T00:00:00Z",
-    updatedAt: "2025-04-01T00:00:00Z"
+    updatedAt: "2025-04-26T13:57:40.986Z"
  },
  {
     id: 2,
