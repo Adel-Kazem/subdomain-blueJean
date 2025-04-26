@@ -102,5 +102,51 @@ const PRODUCTS = [
     ],
     createdAt: "2025-01-15T00:00:00Z",
     updatedAt: "2025-04-05T00:00:00Z"
+ },
+ {
+    id: 3,
+    name: "Aperiam a exercitati",
+    description: "Voluptas ex aut comm",
+    base_price: 25,
+    base_shipping_cost: 51,
+    free_shipping: false,
+    sku: "Omnis ab rem obcaeca",
+    slug: "new-product",
+    brand: "Pariatur Amet fugi",
+    rating: 0,
+    reviews_count: 0,
+    status: "draft",
+    isFeatured: false,
+    isOnSale: true,
+    requiresShipping: true,
+    requiresInventoryTracking: false,
+    stock: 0,
+    hasVariants: false,
+    totalVariantStock: 0,
+    lowStockThreshold: 5,
+    features: {},
+    images: [
+      "https://raw.githubusercontent.com/Adel-Kazem/subdomain-blueJean/main/products_images/belt-wolf-of-wallstreet-leonardo-di-caprio-v0-qd479m2ochjb1.webp"
+    ],
+    options: {},
+    option_images: {},
+    variant_images: {},
+    option_variants_stock: {},
+    option_price_adjustments: {},
+    option_shipping_adjustments: {},
+    weight: {
+      value: 18,
+      unit: "oz"
+    },
+    dimensions: {
+      length: 37,
+      width: 31,
+      height: 38,
+      unit: "mm"
+    },
+    option_dimension_overrides: {},
+    categories: [],
+    createdAt: "2025-04-26T08:24:46.234Z",
+    updatedAt: "2025-04-26T08:24:46.233Z"
  }
 ];
