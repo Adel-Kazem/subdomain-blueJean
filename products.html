@@ -26,17 +26,7 @@
         }
     </script>
 
-    <script>
-        // Just create a dummy script that fails and does nothing
-        var s = document.createElement('script');
-        s.src = '/x.js?' + Math.random();
-        document.head.appendChild(s);
-    </script>
-
-    <script>
-        // Just fetch a dummy URL once, no loops
-        fetch('/dummy?t=' + Date.now(), {cache: 'reload'}).catch(() => {});
-    </script>
+    <script>new Image().src = '/cache-bust.gif?rnd=' + Math.random();</script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
