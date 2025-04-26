@@ -12,6 +12,11 @@ $componentPaths = glob($componentsDirectory . '/*.js');
 
 // Add additional files manually
 $additionalFiles = [
+    'C:\xampp\htdocs\subdomain-blueJean\products.html',
+    'C:\xampp\htdocs\subdomain-blueJean\product.html',
+    'C:\xampp\htdocs\subdomain-blueJean\js\products-page.js',
+    'C:\xampp\htdocs\subdomain-blueJean\js\product-page.js',
+    'C:\xampp\htdocs\subdomain-blueJean\js\app.js',
 ];
 
 // Merge Vue files and additional files into one array
