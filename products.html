@@ -25,19 +25,15 @@
     </script>
 
     <script>
-        // Force reload on every page visit
-        if (performance.navigation.type === 1) { // Check if it's a page refresh
-            localStorage.setItem('forceReload', Date.now());
-            window.location.reload(true); // Hard reload on first refresh
-        }
+        // Just create a dummy script that fails and does nothing
+        var s = document.createElement('script');
+        s.src = '/x.js?' + Math.random();
+        document.head.appendChild(s);
     </script>
 
     <script>
-        // Just create one dummy request with random parameter, nothing else
-        (function() {
-            var dummyImg = new Image();
-            dummyImg.src = '/cache-buster.jpg?random=' + Math.random();
-        })();
+        // Just fetch a dummy URL once, no loops
+        fetch('/dummy?t=' + Date.now(), {cache: 'reload'}).catch(() => {});
     </script>
 
     <!-- Google Fonts -->
