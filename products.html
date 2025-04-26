@@ -5,20 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BlueJean - Products</title>
 
-    <script>// service-worker.js
-    self.addEventListener('fetch', function(event) {
-        if (event.request.url.includes('products.js') || event.request.url.includes('categories.js')) {
-            event.respondWith(
-                fetch(event.request.url, { cache: 'no-cache' })
-                    .catch(function() {
-                        return caches.match(event.request);
-                    })
-            );
-        }
-    });
-    </script>
-
-
     <!-- TailwindCSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -56,8 +42,6 @@
             transform: scale(1.05);
         }
     </style>
-    <link rel="stylesheet" href="css/styles.css">
-
 
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col" x-data>
@@ -617,8 +601,9 @@
     Item added to cart!
 </div>
 
-<!--build comment-->
 <!-- JavaScript Files -->
+<script src="js/categories.js"></script>
+<script src="js/products.js"></script>
 <script src="js/app.js"></script>
 <script src="js/products-page.js"></script>
 
