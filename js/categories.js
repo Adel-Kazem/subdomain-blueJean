@@ -1,7 +1,7 @@
 const CATEGORIES = [
  {
  id: 1,
- name: "Beef2",
+ name: "Beef",
  slug: "beef",
  description: "Premium beef products for all your cooking needs",
  imageUrl: "https://images.unsplash.com/photo-1551135049-8a33b5883817?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
@@ -14,7 +14,7 @@ const CATEGORIES = [
   2
  ],
  created_at: "2025-01-01T00:00:00Z",
- updated_at: "2025-05-06T13:33:39.739Z"
+ updated_at: "2025-05-06T13:32:20.220Z"
  },
  {
  id: 2,
