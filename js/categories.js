@@ -14,7 +14,7 @@ const CATEGORIES = [
   2
  ],
  created_at: "2025-01-01T00:00:00Z",
- updated_at: "2025-04-26T12:31:56.301Z"
+ updated_at: "2025-05-06T13:32:20.220Z"
  },
  {
  id: 2,
