@@ -1,7 +1,7 @@
 const CATEGORIES = [
  {
     id: 1,
-    name: "Beef3344",
+    name: "Beef33445555",
     slug: "beef",
     description: "Premium beef products for all your cooking needs",
     imageUrl: "https://images.unsplash.com/photo-1551135049-8a33b5883817?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
@@ -14,7 +14,7 @@ const CATEGORIES = [
       2
     ],
     created_at: "2025-01-01T00:00:00Z",
-    updated_at: "2025-05-06T13:41:59.724Z"
+    updated_at: "2025-05-06T14:06:43.887Z"
  },
  {
     id: 2,
@@ -95,7 +95,7 @@ const CATEGORIES = [
  },
  {
     id: 7,
-    name: "New Category 22",
+    name: "New Category 22666666",
     slug: "new-category-7",
     description: "",
     imageUrl: "",
@@ -105,7 +105,7 @@ const CATEGORIES = [
     display_order: 70,
     productIds: [],
     created_at: "2025-05-06T13:26:39.958Z",
-    updated_at: "2025-05-06T13:26:39.958Z"
+    updated_at: "2025-05-06T14:06:48.152Z"
  },
  {
     id: 8,
