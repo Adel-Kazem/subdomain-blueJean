@@ -301,7 +301,7 @@ const PRODUCTS = [
  },
  {
  id: 5,
- name: "New Product 222",
+ name: "New Product 222333",
  description: "",
  base_price: 0,
  base_shipping_cost: 0,
@@ -341,11 +341,11 @@ const PRODUCTS = [
  option_dimension_overrides: {},
  categories: [],
  createdAt: "2025-05-06T13:26:33.880Z",
- updatedAt: "2025-05-06T13:26:33.880Z"
+ updatedAt: "2025-05-06T13:31:21.068Z"
  },
  {
  id: 6,
- name: "New Product33",
+ name: "New Product33222",
  description: "",
  base_price: 0,
  base_shipping_cost: 0,
@@ -385,6 +385,50 @@ const PRODUCTS = [
  option_dimension_overrides: {},
  categories: [],
  createdAt: "2025-05-06T13:27:57.904Z",
- updatedAt: "2025-05-06T13:27:57.904Z"
+ updatedAt: "2025-05-06T13:31:30.037Z"
+ },
+ {
+ id: 8,
+ name: "New Product444",
+ description: "",
+ base_price: 0,
+ base_shipping_cost: 0,
+ free_shipping: true,
+ sku: "PRD-008",
+ slug: "new-product",
+ brand: "",
+ rating: 0,
+ reviews_count: 0,
+ status: "active",
+ isFeatured: false,
+ isOnSale: false,
+ requiresShipping: true,
+ requiresInventoryTracking: true,
+ stock: 0,
+ hasVariants: false,
+ totalVariantStock: 0,
+ lowStockThreshold: 5,
+ features: {},
+ images: [],
+ options: {},
+ option_images: {},
+ variant_images: {},
+ option_variants_stock: {},
+ option_price_adjustments: {},
+ option_shipping_adjustments: {},
+ weight: {
+  value: 0,
+  unit: "kg"
+ },
+ dimensions: {
+  length: 0,
+  width: 0,
+  height: 0,
+  unit: "cm"
+ },
+ option_dimension_overrides: {},
+ categories: [],
+ createdAt: "2025-05-06T13:31:37.713Z",
+ updatedAt: "2025-05-06T13:31:37.713Z"
  }
 ];
