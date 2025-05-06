@@ -28,10 +28,11 @@ const CATEGORIES = [
  display_order: 20,
  productIds: [
   1,
-  2
+  2,
+  4
  ],
  created_at: "2025-01-01T00:00:00Z",
- updated_at: "2025-05-06T13:24:03.008Z"
+ updated_at: "2025-05-06T13:25:15.327Z"
  },
  {
  id: 3,
