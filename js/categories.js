@@ -120,5 +120,19 @@ const CATEGORIES = [
  productIds: [],
  created_at: "2025-05-06T13:28:13.171Z",
  updated_at: "2025-05-06T13:28:13.171Z"
+ },
+ {
+ id: 9,
+ name: "New Category4",
+ slug: "new-category-9",
+ description: "",
+ imageUrl: "",
+ featured: false,
+ parent_id: null,
+ active: true,
+ display_order: 90,
+ productIds: [],
+ created_at: "2025-05-06T13:30:14.722Z",
+ updated_at: "2025-05-06T13:30:14.721Z"
  }
 ];
