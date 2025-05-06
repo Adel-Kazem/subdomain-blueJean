@@ -32,7 +32,7 @@ const CATEGORIES = [
   4
  ],
  created_at: "2025-01-01T00:00:00Z",
- updated_at: "2025-05-06T13:25:15.327Z"
+ updated_at: "2025-05-06T13:25:35.784Z"
  },
  {
  id: 3,
