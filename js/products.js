@@ -293,8 +293,10 @@ const PRODUCTS = [
   unit: "cm"
  },
  option_dimension_overrides: {},
- categories: [],
+ categories: [
+  2
+ ],
  createdAt: "2025-05-06T13:23:17.490Z",
- updatedAt: "2025-05-06T13:23:17.490Z"
+ updatedAt: "2025-05-06T13:25:15.491Z"
  }
 ];
