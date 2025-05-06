@@ -301,7 +301,7 @@ const PRODUCTS = [
  },
  {
     id: 5,
-    name: "New Product 222333544fasdf33",
+    name: "New Product 222333544fasdf33fdsf",
     description: "",
     base_price: 0,
     base_shipping_cost: 0,
@@ -341,7 +341,7 @@ const PRODUCTS = [
     option_dimension_overrides: {},
     categories: [],
     createdAt: "2025-05-06T13:26:33.880Z",
-    updatedAt: "2025-05-06T15:53:48.560Z"
+    updatedAt: "2025-05-06T15:56:36.934Z"
  },
  {
     id: 6,
