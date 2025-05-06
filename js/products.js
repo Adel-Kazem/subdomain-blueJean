@@ -205,5 +205,52 @@ const PRODUCTS = [
     ],
     createdAt: "2025-01-15T00:00:00Z",
     updatedAt: "2025-04-05T00:00:00Z"
+ },
+ {
+    id: 3,
+    name: "testing caching busting",
+    description: "Ea vitae id fugit ",
+    base_price: 10,
+    base_shipping_cost: 0,
+    free_shipping: true,
+    sku: "Ea error id unde su",
+    slug: "new-product",
+    brand: "In quis expedita quo",
+    rating: 0,
+    reviews_count: 0,
+    status: "draft",
+    isFeatured: true,
+    isOnSale: true,
+    requiresShipping: true,
+    requiresInventoryTracking: false,
+    stock: 0,
+    hasVariants: false,
+    totalVariantStock: 0,
+    lowStockThreshold: 5,
+    features: {},
+    images: [
+      "https://raw.githubusercontent.com/Adel-Kazem/subdomain-blueJean/main/products_images/Belts-Style-Image-3.jpg",
+      "https://raw.githubusercontent.com/Adel-Kazem/subdomain-blueJean/main/products_images/belt-wolf-of-wallstreet-leonardo-di-caprio-v0-qd479m2ochjb1.webp"
+    ],
+    options: {},
+    option_images: {},
+    variant_images: {},
+    option_variants_stock: {},
+    option_price_adjustments: {},
+    option_shipping_adjustments: {},
+    weight: {
+      value: 49,
+      unit: "kg"
+    },
+    dimensions: {
+      length: 92,
+      width: 2,
+      height: 23,
+      unit: "cm"
+    },
+    option_dimension_overrides: {},
+    categories: [],
+    createdAt: "2025-05-06T12:02:44.392Z",
+    updatedAt: "2025-05-06T12:02:44.392Z"
  }
 ];
