@@ -87,7 +87,8 @@ const PRODUCTS = [
     categories: [
       1,
       2,
-      3
+      3,
+      10
     ],
     upselling: [
       3
@@ -100,7 +101,7 @@ const PRODUCTS = [
       2
     ],
     createdAt: "2025-01-01T00:00:00Z",
-    updatedAt: "2025-04-26T13:57:40.986Z"
+    updatedAt: "2025-05-07T10:51:12.873Z"
  },
  {
     id: 2,
@@ -190,7 +191,8 @@ const PRODUCTS = [
     categories: [
       1,
       2,
-      3
+      3,
+      10
     ],
     upselling: [
       1,
@@ -204,7 +206,7 @@ const PRODUCTS = [
       1
     ],
     createdAt: "2025-01-15T00:00:00Z",
-    updatedAt: "2025-04-05T00:00:00Z"
+    updatedAt: "2025-05-07T10:51:12.873Z"
  },
  {
     id: 3,
@@ -249,9 +251,11 @@ const PRODUCTS = [
       unit: "cm"
     },
     option_dimension_overrides: {},
-    categories: [],
+    categories: [
+      10
+    ],
     createdAt: "2025-05-06T12:02:44.392Z",
-    updatedAt: "2025-05-06T12:02:44.392Z"
+    updatedAt: "2025-05-07T10:51:12.874Z"
  },
  {
     id: 4,
@@ -294,10 +298,11 @@ const PRODUCTS = [
     },
     option_dimension_overrides: {},
     categories: [
-      2
+      2,
+      10
     ],
     createdAt: "2025-05-06T13:23:17.490Z",
-    updatedAt: "2025-05-06T13:25:15.491Z"
+    updatedAt: "2025-05-07T10:51:12.874Z"
  },
  {
     id: 5,
@@ -339,9 +344,11 @@ const PRODUCTS = [
       unit: "cm"
     },
     option_dimension_overrides: {},
-    categories: [],
+    categories: [
+      10
+    ],
     createdAt: "2025-05-06T13:26:33.880Z",
-    updatedAt: "2025-05-06T15:56:36.934Z"
+    updatedAt: "2025-05-07T10:51:12.874Z"
  },
  {
     id: 6,
@@ -383,9 +390,11 @@ const PRODUCTS = [
       unit: "cm"
     },
     option_dimension_overrides: {},
-    categories: [],
+    categories: [
+      10
+    ],
     createdAt: "2025-05-06T13:27:57.904Z",
-    updatedAt: "2025-05-06T13:31:30.037Z"
+    updatedAt: "2025-05-07T10:51:12.875Z"
  },
  {
     id: 8,
@@ -427,8 +436,10 @@ const PRODUCTS = [
       unit: "cm"
     },
     option_dimension_overrides: {},
-    categories: [],
+    categories: [
+      10
+    ],
     createdAt: "2025-05-06T13:31:37.713Z",
-    updatedAt: "2025-05-06T13:31:37.713Z"
+    updatedAt: "2025-05-07T10:51:12.875Z"
  }
 ];
