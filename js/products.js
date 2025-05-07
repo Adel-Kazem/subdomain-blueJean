@@ -441,5 +441,49 @@ const PRODUCTS = [
     ],
     createdAt: "2025-05-06T13:31:37.713Z",
     updatedAt: "2025-05-07T10:51:12.875Z"
+ },
+ {
+    id: 9,
+    name: "test 5",
+    description: "",
+    base_price: 0,
+    base_shipping_cost: 0,
+    free_shipping: true,
+    sku: "PRD-009",
+    slug: "new-product",
+    brand: "",
+    rating: 0,
+    reviews_count: 0,
+    status: "active",
+    isFeatured: false,
+    isOnSale: false,
+    requiresShipping: true,
+    requiresInventoryTracking: true,
+    stock: 0,
+    hasVariants: false,
+    totalVariantStock: 0,
+    lowStockThreshold: 5,
+    features: {},
+    images: [],
+    options: {},
+    option_images: {},
+    variant_images: {},
+    option_variants_stock: {},
+    option_price_adjustments: {},
+    option_shipping_adjustments: {},
+    weight: {
+      value: 0,
+      unit: "kg"
+    },
+    dimensions: {
+      length: 0,
+      width: 0,
+      height: 0,
+      unit: "cm"
+    },
+    option_dimension_overrides: {},
+    categories: [],
+    createdAt: "2025-05-07T11:05:26.567Z",
+    updatedAt: "2025-05-07T11:05:26.567Z"
  }
 ];
