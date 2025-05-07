@@ -167,8 +167,16 @@ const CATEGORIES = [
     parent_id: "7",
     active: true,
     display_order: "56",
-    productIds: [],
+    productIds: [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8
+    ],
     created_at: "2025-05-07T10:52:20.995Z",
-    updated_at: "2025-05-07T11:05:26.579Z"
+    updated_at: "2025-05-07T10:52:20.995Z"
  }
 ];
