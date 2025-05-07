@@ -156,5 +156,27 @@ const CATEGORIES = [
     ],
     created_at: "2025-05-07T10:51:12.866Z",
     updated_at: "2025-05-07T10:51:12.866Z"
+ },
+ {
+    id: 11,
+    name: "test123Sequi cupidatat reic",
+    slug: "Exercitation ex ut e",
+    description: "Do ullamco illo quod",
+    imageUrl: "Itaque eum excepturi",
+    featured: true,
+    parent_id: "7",
+    active: true,
+    display_order: "56",
+    productIds: [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8
+    ],
+    created_at: "2025-05-07T10:52:20.995Z",
+    updated_at: "2025-05-07T10:52:20.995Z"
  }
 ];
