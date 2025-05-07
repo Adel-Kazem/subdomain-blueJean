@@ -88,8 +88,7 @@ const PRODUCTS = [
       1,
       2,
       3,
-      10,
-      11
+      10
     ],
     upselling: [
       3
@@ -102,7 +101,7 @@ const PRODUCTS = [
       2
     ],
     createdAt: "2025-01-01T00:00:00Z",
-    updatedAt: "2025-05-07T10:52:21.001Z"
+    updatedAt: "2025-05-07T10:51:12.873Z"
  },
  {
     id: 2,
@@ -193,8 +192,7 @@ const PRODUCTS = [
       1,
       2,
       3,
-      10,
-      11
+      10
     ],
     upselling: [
       1,
@@ -208,7 +206,7 @@ const PRODUCTS = [
       1
     ],
     createdAt: "2025-01-15T00:00:00Z",
-    updatedAt: "2025-05-07T10:52:21.001Z"
+    updatedAt: "2025-05-07T10:51:12.873Z"
  },
  {
     id: 3,
@@ -254,11 +252,10 @@ const PRODUCTS = [
     },
     option_dimension_overrides: {},
     categories: [
-      10,
-      11
+      10
     ],
     createdAt: "2025-05-06T12:02:44.392Z",
-    updatedAt: "2025-05-07T10:52:21.002Z"
+    updatedAt: "2025-05-07T10:51:12.874Z"
  },
  {
     id: 4,
@@ -302,11 +299,10 @@ const PRODUCTS = [
     option_dimension_overrides: {},
     categories: [
       2,
-      10,
-      11
+      10
     ],
     createdAt: "2025-05-06T13:23:17.490Z",
-    updatedAt: "2025-05-07T10:52:21.002Z"
+    updatedAt: "2025-05-07T10:51:12.874Z"
  },
  {
     id: 5,
@@ -349,11 +345,10 @@ const PRODUCTS = [
     },
     option_dimension_overrides: {},
     categories: [
-      10,
-      11
+      10
     ],
     createdAt: "2025-05-06T13:26:33.880Z",
-    updatedAt: "2025-05-07T10:52:21.003Z"
+    updatedAt: "2025-05-07T10:51:12.874Z"
  },
  {
     id: 6,
@@ -396,11 +391,10 @@ const PRODUCTS = [
     },
     option_dimension_overrides: {},
     categories: [
-      10,
-      11
+      10
     ],
     createdAt: "2025-05-06T13:27:57.904Z",
-    updatedAt: "2025-05-07T10:52:21.003Z"
+    updatedAt: "2025-05-07T10:51:12.875Z"
  },
  {
     id: 8,
@@ -443,10 +437,9 @@ const PRODUCTS = [
     },
     option_dimension_overrides: {},
     categories: [
-      10,
-      11
+      10
     ],
     createdAt: "2025-05-06T13:31:37.713Z",
-    updatedAt: "2025-05-07T10:52:21.004Z"
+    updatedAt: "2025-05-07T10:51:12.875Z"
  }
 ];
