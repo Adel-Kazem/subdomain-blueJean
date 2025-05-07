@@ -134,5 +134,27 @@ const CATEGORIES = [
     productIds: [],
     created_at: "2025-05-06T13:30:14.722Z",
     updated_at: "2025-05-06T13:30:14.721Z"
+ },
+ {
+    id: 10,
+    name: "test11 Asperiores voluptatu",
+    slug: "Exercitationem sit e",
+    description: "Omnis et consequuntu",
+    imageUrl: "Ad ea incidunt perf",
+    featured: false,
+    parent_id: "None (Top Level)",
+    active: false,
+    display_order: "48",
+    productIds: [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8
+    ],
+    created_at: "2025-05-07T10:51:12.866Z",
+    updated_at: "2025-05-07T10:51:12.866Z"
  }
 ];
